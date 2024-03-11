@@ -1,0 +1,51 @@
+name: "Pull Requests"
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+
+env:
+  clientId: 
+  tenantId: 
+  subscriptionDev: 
+
+permissions:
+  id-token: write
+  contents: read
+  packages: read
+
+jobs:
+  UnitTests:
+    runs-on: ubuntu-latest
+    name: Unit Tests
+    steps:
+      - name: Clone Repo
+        uses: actions/checkout@v3
+
+      - name: Install Dotnet Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.x.x
+
+      - name: Run Unit Tests
+        run: dotnet test ./StartUp.Web.UnitTests
+  
+  IntegrationTests:
+    runs-on: ubuntu-latest
+    name: Integration Tests
+    steps:
+      - name: Clone Repo
+        uses: actions/checkout@v3
+
+      - name: Install Dotnet Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.x.x
+
+      - name: Permissions
+        run: chmod 777 -R Infra/Local/
+
+      - name: Run Integration Tests
+        run: make test-integration
