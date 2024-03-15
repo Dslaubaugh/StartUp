@@ -20,4 +20,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="my-vue-app\tests\components\" />
+    </ItemGroup>
+
 </Project>
