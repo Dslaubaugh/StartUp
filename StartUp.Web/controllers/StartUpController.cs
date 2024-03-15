@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using StartUp.Web.models;
 using StartUp.Web.services;
 
 namespace StartUp.Web.controllers;
@@ -17,5 +18,11 @@ public class StartUpController : ControllerBase
     public async Task<string> Obiwan()
     {
         return _startupService.GetGreeting();
+    }
+    
+    [HttpPost("insert")]
+    public async Task<Guid> InsertIntoTable([FromBody] InsertValues values)
+    {
+        return await _startupService.InsertIntoTable(values);
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using StartUp.Web.database;
 using StartUp.Web.models;
 using StartUp.Web.services;
 
@@ -31,6 +32,8 @@ public class Startup
         
        
         services.AddTransient<IStartUpService,StartUpService>();
+        services.AddTransient<IDBConnectionFactory,DBConnectionFactory>();
+        services.AddTransient<IStartUpDBContext,StartUpDBContext>();
 
         services.AddSingleton(appSettings);
         
